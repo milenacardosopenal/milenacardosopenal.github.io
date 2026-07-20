@@ -12,7 +12,8 @@
 <script>
   const HOTMART_CHECKOUT = "https://pay.hotmart.com/SEU_CODIGO_DO_PRODUTO";
   // Link de EMBED do vídeo de vendas (YouTube: https://www.youtube.com/embed/SEU_VIDEO_ID | Vimeo | Panda/Vturb)
-  const VSL_EMBED = "https://www.youtube.com/embed/SEU_VIDEO_ID";
+  const VSL_EMBED = "https://www.youtube.com/embed/j9rEsRhf7z4";
+  const VSL_VERTICAL = true; // true = vídeo vertical (Shorts/Reels 9:16); false = horizontal 16:9
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -148,7 +149,9 @@
   .vsl-overlay{position:fixed;inset:0;z-index:100;background:rgba(20,16,12,.82);display:none;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
   .vsl-overlay.open{display:flex}
   .vsl-box{width:100%;max-width:880px;position:relative}
+  .vsl-box.vertical{max-width:min(400px, 46vh)}
   .vsl-frame{position:relative;width:100%;padding-top:56.25%;background:#000;border-radius:12px;overflow:hidden;box-shadow:0 40px 90px rgba(0,0,0,.5)}
+  .vertical .vsl-frame{padding-top:177.78%}
   .vsl-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
   .vsl-close{position:absolute;top:-46px;right:0;background:none;border:none;color:#FBF7EE;font-weight:700;font-size:15px;cursor:pointer;font-family:var(--sans)}
   .vsl-close:hover{color:#E6C98A}
@@ -353,6 +356,7 @@
 
 <script>
   function openVsl(){
+    if(VSL_VERTICAL){ document.querySelector('.vsl-box').classList.add('vertical'); }
     var fr = document.getElementById('vslIframe');
     if(!fr.getAttribute('src')){ fr.setAttribute('src', VSL_EMBED + (VSL_EMBED.indexOf('?')>-1 ? '&autoplay=1' : '?autoplay=1')); }
     document.getElementById('vslOverlay').classList.add('open');
